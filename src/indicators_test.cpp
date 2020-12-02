@@ -33,10 +33,14 @@ void rr_value_test(const double current_price, const double last_price){
     assert(rr - 0.00845444 < MAX_ERROR);
 }
 
-void pd_value_test(const double current_price, const double last_price){
+void pd_value_test(const std::vector<double>& closing_prices, const uint32_t evaluation_size){
     std::cout << "+ Testing percent difference calculation" << std::endl;
-    double pd = fta::pd(current_price, last_price);
+    
+    double sma_period = fta::sma(closing_prices, evaluation_size);
+    double pd = fta::pd(closing_prices[closing_prices.size() - 1], sma_period);
+    
     assert(pd - 0.84544409 < MAX_ERROR);
+    assert(pd == fta::pd(closing_prices, evaluation_size));
 }
 
 int main(){
@@ -55,7 +59,7 @@ int main(){
     rsi_ewma_value_test(closing_prices, evaluation_size, alpha);
     ewma_value_test(closing_prices, evaluation_size, alpha);
     rr_value_test(current_price, last_price);
-    pd_value_test(current_price, last_price);
+    pd_value_test(closing_prices, evaluation_size);
 
     std::cout << std::endl << "All tests passed" << std::endl;
 }

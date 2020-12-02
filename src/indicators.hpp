@@ -63,7 +63,7 @@ namespace fta {
     }
 
     //Simple moving average
-    inline double sma(const std::vector<double>& closing_prices, uint32_t evaluation_size){
+    inline double sma(const std::vector<double>& closing_prices, const uint32_t evaluation_size){
         double sum = 0;
         int last_value = closing_prices.size() - evaluation_size;
         for(int i = closing_prices.size() - 1; i >= last_value; --i){
@@ -72,6 +72,7 @@ namespace fta {
         return sum/evaluation_size;
     }
 
+    // raising falling rate 
     inline double rr(double current_price, double last_price){
         return (current_price - last_price) / last_price;
     }
@@ -79,6 +80,11 @@ namespace fta {
     //Percent difference from the simple moving average in a given period
     inline double pd(double current_price, double sma_on_period){
         return ( (current_price - sma_on_period) / sma_on_period ) * 100;
+    }
+
+    inline double pd(const std::vector<double>& closing_prices, const uint32_t evaluation_size){
+        double sma_period = sma(closing_prices, evaluation_size);
+        return pd(closing_prices[closing_prices.size() - 1], sma_period);
     }
 }
 #endif
