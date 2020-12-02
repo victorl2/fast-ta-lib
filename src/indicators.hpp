@@ -80,6 +80,5 @@ namespace fta {
     inline double pd(double current_price, double sma_on_period){
         return ( (current_price - sma_on_period) / sma_on_period ) * 100;
     }
-    
 }
 #endif
