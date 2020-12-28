@@ -6,7 +6,7 @@ FastTA lib contains functions to calculate technical analysis indicators in a op
 
 ## Running tests
 + You must have a c++ compiler installed, is this example we will use [`g++`](https://www.geeksforgeeks.org/compiling-with-g-plus-plus/)
-+ Inside the *fast-ta-lib* folder compile the code with `g++ src/indicators_test.cpp`
-+ Run the tests with `./a.out`
++ Inside the *fast-ta-lib* folder compile the code with `g++ src/indicators_test.cpp tests`
++ Run the tests with `./tests`
 
 If you see the message *All tests passed* everything is working properly.
